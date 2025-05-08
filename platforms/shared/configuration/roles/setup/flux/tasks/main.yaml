@@ -24,24 +24,24 @@
     ssh-keyscan {{ git_host }} >> ~/.ssh/known_hosts
   when: git_protocol == "ssh"
 
-- name: Install flux cli and bootstrap flux v2
-  shell: |
-    {{ bin_install_dir }}/flux bootstrap git \
-    --url={{ git_url }} \
-    --components-extra=image-reflector-controller,image-automation-controller \
-    --branch={{ git_branch }} \
-    --username={{ git_username }} \
-    --password={{ git_password }} \
-    --token-auth=true \
-    --path={{ git_path }} \
-    --version=v{{ flux_version }} \
-    --namespace=flux-{{ network.env.type }} \
-    --context={{ kubecontext }}
-  when: git_protocol == "https"
-  environment:
-    KUBECONFIG: "{{ item.k8s.config_file }}"
-  tags:
-    - flux
+# - name: Install flux cli and bootstrap flux v2
+#   shell: |
+#     {{ bin_install_dir }}/flux bootstrap git \
+#     --url={{ git_url }} \
+#     --components-extra=image-reflector-controller,image-automation-controller \
+#     --branch={{ git_branch }} \
+#     --username={{ git_username }} \
+#     --password={{ git_password }} \
+#     --token-auth=true \
+#     --path={{ git_path }} \
+#     --version=v{{ flux_version }} \
+#     --namespace=flux-{{ network.env.type }} \
+#     --context={{ kubecontext }}
+#   when: git_protocol == "https"
+#   environment:
+#     KUBECONFIG: "{{ item.k8s.config_file }}"
+#   tags:
+#     - flux
 
 - name: Install flux cli and bootstrap flux v2
   shell: |
